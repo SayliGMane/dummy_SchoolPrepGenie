@@ -1,3 +1,6 @@
+
+# Parent registration json
+
 {
     "user": {
         "username": "annie",
@@ -11,6 +14,9 @@
     "gender":"F"
 }
 
+
+# Add children details
+
 {
     "first_name": "Sam",
     "last_name": "John",
@@ -19,3 +25,20 @@
     "gender": "M",
     "parent": 14            
 }
+
+
+# Teacher Registration
+
+{
+    "user": {
+        "username": "samjohn",
+        "first_name": "Sam",
+        "last_name": "John",
+        "email":"ghkk@gmail.com",
+        "password": "password123"
+    },
+    "gender": "M",
+    "class_id": 1  
+}
+
+

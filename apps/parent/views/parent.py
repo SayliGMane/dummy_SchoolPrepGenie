@@ -34,12 +34,14 @@ def parent_list_create(request):
         
          
         user_serializer = UserSerializer(data=user_data)
+        
         if user_serializer.is_valid():
             user = user_serializer.save()
 
            
             parent_data['user'] = user.id
             parent_serializer = ParentSerializer(data=parent_data)
+            
             if parent_serializer.is_valid():
                 parent = parent_serializer.save()
                 return Response(parent_serializer.data, status=status.HTTP_201_CREATED)

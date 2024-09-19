@@ -39,6 +39,7 @@ class StudentSerializer(serializers.ModelSerializer):
             representation['parent_name'] = parent_data.get('parent_name', 'No Parent')
             representation['parent_username'] = parent_data.get('username', 'No Username')
             representation['parent_email'] = parent_data.get('email', 'No Email')
+            representation['contact_number'] = parent_data.get('phone_number','No Phone Number')
         
         return representation
     

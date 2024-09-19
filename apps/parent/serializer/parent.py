@@ -2,9 +2,7 @@
 from rest_framework import serializers
 from apps.parent.models.parent import Parent
 from django.contrib.auth.models import User
-from apps.student.serializer.student import StudentSerializer
-from apps.student.models.student import Student
-from apps.user.serializer import UserSerializer
+
 
 class ParentSerializer(serializers.ModelSerializer):
     
