@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models.student import Student,Class
 
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'age', 'class_id', 'gender', 'parent_name')
+    list_display = ('id','first_name', 'last_name', 'age', 'class_id', 'gender', 'parent_name')
 
     def parent_name(self, obj):
         if obj.parent:

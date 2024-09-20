@@ -20,6 +20,11 @@ class Student(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, related_name='students',default=1,null=True, blank=True)
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')],default='M')
     
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['first_name', 'last_name', 'age', 'class_id'], name='unique_student_entry')
+        ]
+    
 
     def __str__(self):
         class_name = self.class_id.class_name if self.class_id else 'No Class'
