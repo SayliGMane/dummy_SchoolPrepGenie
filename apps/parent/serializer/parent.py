@@ -1,54 +1,40 @@
-
 from rest_framework import serializers
-from apps.parent.models.parent import Parent
-from django.contrib.auth.models import User
+from apps.parent.models.parent import Parent,Class
+from apps.parent.models.student import Student
+from apps.user.serializer.user import UserSerializer
+from .student import StudentSerializer
+
 
 
 class ParentSerializer(serializers.ModelSerializer):
-    
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), write_only=True)
-   
-    parent_name = serializers.SerializerMethodField()
-    username = serializers.SerializerMethodField()
-    email = serializers.SerializerMethodField()
-   
-   
-    
+    user = UserSerializer()  
+    children = StudentSerializer(many=True)
+
     class Meta:
         model = Parent
-        fields = ['user', 'parent_name', 'username', 'email','gender', 'address','phone_number']
-        read_only_fields = ['parent_name', 'username', 'email']
-
-    def get_parent_name(self, obj):
-        return f"{obj.user.first_name} {obj.user.last_name}".strip() if obj.user else None
-
-    def get_username(self, obj):
-        return obj.user.username if obj.user else None
-
-    def get_email(self, obj):
-        return obj.user.email if obj.user else None
-    
-    def get_gender(self, obj):
-        return obj.user.gender if obj.user else None
-    
-    def validate_gender(self, value):
-        """Validate that the gender is either 'M' or 'F'."""
-        if value not in dict(Parent._meta.get_field('gender').choices):
-            raise serializers.ValidationError("Invalid gender choice.")
-        return value
-        
+        fields = ['user', 'address', 'phone_number', 'gender', 'children']
 
     def create(self, validated_data):
-        
-        user = validated_data.pop('user')
-        return Parent.objects.create(user=user, **validated_data)
+        children_data = validated_data.pop('children')
+        user_data = validated_data.pop('user')
 
-    
-    def update(self, instance, validated_data):
-       
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
-        instance.address = validated_data.get('address', instance.address)
-        instance.gender = validated_data.get('gender',instance.gender)
-        instance.save()
+        user_serializer = UserSerializer(data=user_data)
+        user_serializer.is_valid(raise_exception=True)
+        user = user_serializer.save()
+
+        parent = Parent.objects.create(user=user, **validated_data)
+
+        for child_data in children_data:
+            class_id = child_data.pop('class_id')
+            try:
                 
-        return instance
+                Student.objects.create(parent=parent, class_id=class_id, **child_data)
+            except Class.DoesNotExist:
+                raise serializers.ValidationError({"children": {child_data["first_name"]: "Invalid class_id."}})
+
+        return parent
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['children'] = StudentSerializer(instance.children.all(), many=True).data
+        return representation

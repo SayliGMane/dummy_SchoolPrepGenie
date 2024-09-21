@@ -1,1 +1,1 @@
-from .parent import parent_list_create
+from .parent import parent_list,student_info

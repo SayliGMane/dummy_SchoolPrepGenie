@@ -19,8 +19,7 @@ CREATED_APP = [
     # USER DEFINED APPS
     
    "apps.parent.apps.ParentConfig",
-   "apps.student.apps.StudentConfig",
-   "apps.teacher.apps.TeacherConfig",
+  
     
     
 ]
@@ -45,6 +44,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'apps.parent.middleware.DisableCSRFCheckMiddleware',
    
 ]
 
@@ -120,14 +121,8 @@ REST_FRAMEWORK = {
     ),
 }
 
-# Email settings for sending confirmation emails
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.your-email-provider.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ginu.george@dci-student.org'
-EMAIL_HOST_PASSWORD = 'holybibleopen'
-DEFAULT_FROM_EMAIL = 'ginu.george@dci-student.org'
-FRONTEND_URL = 'http://your-frontend-url.com'
 
 SITE_URL = 'http://127.0.0.1:8000'
+
+
+
