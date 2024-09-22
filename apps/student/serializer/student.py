@@ -25,18 +25,3 @@ class StudentSerializer(serializers.ModelSerializer):
         student.save()
         return student
     
-class StudentLoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField(write_only=True)
-
-    def validate(self, data):
-        try:
-            student = Student.objects.get(username=data['username'])
-        except Student.DoesNotExist:
-            raise serializers.ValidationError("Invalid username or password.")
-
-        if not check_password(data['password'], student.password):
-            raise serializers.ValidationError("Invalid username or password.")
-        
-        return data    
-    

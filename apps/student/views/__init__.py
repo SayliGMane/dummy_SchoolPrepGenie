@@ -1,1 +1,1 @@
-from .student import student_login,student_info
+from .student import student_info

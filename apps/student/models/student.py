@@ -1,6 +1,7 @@
 from django.db import models
 from apps.parent.models.parent import Parent,Class
 from django.contrib.auth.hashers import make_password
+import secrets
 
 class Student(models.Model):
     
@@ -12,10 +13,16 @@ class Student(models.Model):
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
     username = models.CharField(max_length=30, unique=True, null=True, blank=True)
     password = models.CharField(max_length=128, null=True, blank=True)  # Password will be hashed
+    token = models.CharField(max_length=64, blank=True, null=True)
 
+   
+    
     def save(self, *args, **kwargs):
         if self.password:
             self.password = make_password(self.password)  # Hash the password before saving
+            
+
+            
         super().save(*args, **kwargs)
 
 

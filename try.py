@@ -2,9 +2,9 @@
 # Parent registration json
 {
     "user": {
-        "username": "parent456",
-        "first_name": "Alice",
-        "last_name": "Smith",
+        "username": "ginu",
+        "first_name": "ginu",
+        "last_name": "george",
         "email": "alice.smith@example.com",
         "password": "password123"
     },
@@ -13,21 +13,21 @@
     "gender": "F",
     "children": [
         {
-            "first_name": "Liam",
-            "last_name": "Smith",
+            "first_name": "edhu",
+            "last_name": "jestin",
             "age": 10,
             "class_id": 3,  
             "gender": "M",
-            "username": "li_smith",
+            "username": "edhu",
             "password": "secure_password"
         },
         {
-            "first_name": "Emma",
-            "last_name": "Smith",
+            "first_name": "Emami",
+            "last_name": "jestin",
             "age": 7,
             "class_id": 2,  
             "gender": "F",
-            "username": "emma_smith",
+            "username": "emami",
             "password": "secure_password"
         }
     ]
