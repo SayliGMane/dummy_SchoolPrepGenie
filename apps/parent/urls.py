@@ -8,5 +8,6 @@ urlpatterns = [
 
     path('registration/', views.parent_list, name='parent_list_create'),
     path('student/info/', views.student_info, name='student_info'),
+     
     
 ]    

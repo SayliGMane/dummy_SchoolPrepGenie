@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from apps.parent.models.parent import Parent
 from apps.parent.serializer.parent import ParentSerializer
-from apps.parent.models.student import Student
-from apps.parent.serializer.student import StudentSerializer
+from apps.student.models.student import Student
+from apps.student.serializer.student import StudentSerializer
 
 @api_view(['GET', 'POST'])
 def parent_list(request):

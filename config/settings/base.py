@@ -19,6 +19,7 @@ CREATED_APP = [
     # USER DEFINED APPS
     
    "apps.parent.apps.ParentConfig",
+   "apps.student.apps.StudentConfig",
   
     
     

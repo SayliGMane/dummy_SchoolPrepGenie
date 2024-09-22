@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models.parent import Parent,Class
-from .models.student import Student
+from apps.student.models.student import Student
 
 
 class ClassAdmin(admin.ModelAdmin):
@@ -46,30 +46,7 @@ class ParentAdmin(admin.ModelAdmin):
     
     
 
-class StudentAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'full_name',
-        'age',
-        'gender',
-        'class_name',
-        'parent_full_name'
-    )
 
-    def full_name(self, obj):
-        return f"{obj.first_name} {obj.last_name}"
-    full_name.short_description = 'Student Name'
-
-    def class_name(self, obj):
-        return obj.class_id.class_name  
-    class_name.short_description = 'Class'
-
-    def parent_full_name(self, obj):
-            return f"{obj.parent.user.first_name} {obj.parent.user.last_name}" if obj.parent else 'N/A'
-    parent_full_name.short_description = 'Parent Name'
-
-    
     
 admin.site.register(Class,ClassAdmin)
 admin.site.register(Parent,ParentAdmin)
-admin.site.register(Student,StudentAdmin)

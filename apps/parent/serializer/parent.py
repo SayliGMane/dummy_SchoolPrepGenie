@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from apps.parent.models.parent import Parent,Class
-from apps.parent.models.student import Student
+from apps.parent.models.parent import Parent
+from apps.student.models.student import Student
 from apps.user.serializer.user import UserSerializer
-from .student import StudentSerializer
+from apps.student.serializer.student import StudentSerializer
 
 
 
@@ -30,7 +30,7 @@ class ParentSerializer(serializers.ModelSerializer):
             Student.objects.create(parent=parent, **child_data)
 
         return parent
-        return parent
+        
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

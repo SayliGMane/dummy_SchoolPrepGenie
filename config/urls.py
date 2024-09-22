@@ -31,6 +31,6 @@ urlpatterns = [
 
     path('api/v1/user/', include('apps.user.urls',namespace='user-urls')),
     path('api/v1/parent/', include('apps.parent.urls',namespace='parent-urls')),
-   
+    path('api/v1/student/', include('apps.student.urls',namespace='student-urls')),
     
 ]
