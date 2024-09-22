@@ -15,6 +15,8 @@ class ParentSerializer(serializers.ModelSerializer):
         fields = ['user', 'address', 'phone_number', 'gender', 'children']
 
     def create(self, validated_data):
+        
+        
         children_data = validated_data.pop('children')
         user_data = validated_data.pop('user')
 
@@ -25,13 +27,9 @@ class ParentSerializer(serializers.ModelSerializer):
         parent = Parent.objects.create(user=user, **validated_data)
 
         for child_data in children_data:
-            class_id = child_data.pop('class_id')
-            try:
-                
-                Student.objects.create(parent=parent, class_id=class_id, **child_data)
-            except Class.DoesNotExist:
-                raise serializers.ValidationError({"children": {child_data["first_name"]: "Invalid class_id."}})
+            Student.objects.create(parent=parent, **child_data)
 
+        return parent
         return parent
 
     def to_representation(self, instance):

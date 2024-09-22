@@ -9,6 +9,7 @@ class Student(models.Model):
     age = models.PositiveIntegerField()
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE)  
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
+    
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
