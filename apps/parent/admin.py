@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models.parent import Parent,Class
-from apps.student.models.student import Student
+from apps.parent.models.leave import Leave
 
 
 class ClassAdmin(admin.ModelAdmin):
@@ -45,8 +45,24 @@ class ParentAdmin(admin.ModelAdmin):
     user_date_joined.short_description = 'Date Joined'
     
     
+class LeaveAdmin(admin.ModelAdmin):
+    list_display = ('id', 'get_parent_name', 'get_student_name', 'get_class_name', 'leave_type', 'status', 'leave_description', 'start_date', 'end_date')
+
+    def get_parent_name(self, obj):
+        return f"{obj.parent.user.first_name} {obj.parent.user.last_name}"  
+
+    def get_student_name(self, obj):
+        return f"{obj.student.first_name} {obj.student.last_name}" 
+
+    def get_class_name(self, obj):
+        return obj.student.class_id.class_name 
+
+    get_parent_name.short_description = 'Parent Name'
+    get_student_name.short_description = 'Student Name'
+    get_class_name.short_description = 'Class Name'
 
 
     
 admin.site.register(Class,ClassAdmin)
 admin.site.register(Parent,ParentAdmin)
+admin.site.register(Leave,LeaveAdmin)

@@ -57,4 +57,14 @@
 }
 
 
+{
+    "parent_id": 21,
+    "student_id": 13,
+    "leave_type": "SICK",
+    "leave_description": "Student is sick with a cold and needs rest.",
+    "start_date": "2024-09-24",
+    "end_date": "2024-09-26"
+}
+
+
 #pip install djangorestframework-simplejwt
