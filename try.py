@@ -50,7 +50,6 @@
         "username": "samjohn",
         "first_name": "Sam",
         "last_name": "John",
-        "email":"ghkk@gmail.com",
         "password": "password123"
     },
     "gender": "M",
