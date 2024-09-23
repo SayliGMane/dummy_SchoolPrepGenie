@@ -3,7 +3,7 @@ from apps.parent.models.parent import Parent
 from apps.student.models.student import Student
 from apps.user.serializer.user import UserSerializer
 from apps.student.serializer.student import StudentSerializer
-
+from django.contrib.auth.models import User
 
 
 class ParentSerializer(serializers.ModelSerializer):
@@ -16,23 +16,49 @@ class ParentSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         
-        
-        children_data = validated_data.pop('children')
+      
+
         user_data = validated_data.pop('user')
+        
+       
+      
+        user = User.objects.create_user(
+            username=user_data['username'],
+            password=user_data['password'],
+            first_name=user_data.get('first_name', ''),
+            last_name=user_data.get('last_name', ''),
+            email=user_data.get('email', '')
+        )
+       
 
-        user_serializer = UserSerializer(data=user_data)
-        user_serializer.is_valid(raise_exception=True)
-        user = user_serializer.save()
+        parent = Parent.objects.create(
+        user=user,
+        phone_number=validated_data.get('phone_number'),
+        address=validated_data.get('address'),
+        gender=validated_data.get('gender')
+        )
+      
 
-        parent = Parent.objects.create(user=user, **validated_data)
+        children_data = validated_data.pop('children', [])
+        
 
         for child_data in children_data:
-            Student.objects.create(parent=parent, **child_data)
+            student_user = User.objects.create_user(
+                username=child_data['username'],
+                password=child_data['password'],
+                first_name=child_data.get('first_name', ''),
+                last_name=child_data.get('last_name', '')
+            )
+           
+
+            Student.objects.create(
+               user=student_user,
+                parent=parent,
+                age=child_data['age'],
+                class_id_id=child_data['class_id'].id, 
+                gender=child_data['gender'],
+                username=child_data['username']
+            )
+          
 
         return parent
-        
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['children'] = StudentSerializer(instance.children.all(), many=True).data
-        return representation

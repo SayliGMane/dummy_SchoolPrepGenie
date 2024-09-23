@@ -7,7 +7,7 @@ urlpatterns = [
 
 
     path('registration/', views.parent_list, name='parent_list_create'),
-    path('student/info/', views.student_info, name='student_info'),
+    path('student/info/', views.parent_student_info, name='parent_student_info'),
      
     
 ]    

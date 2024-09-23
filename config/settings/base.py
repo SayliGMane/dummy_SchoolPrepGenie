@@ -20,6 +20,7 @@ CREATED_APP = [
     
    "apps.parent.apps.ParentConfig",
    "apps.student.apps.StudentConfig",
+   "apps.teacher.apps.TeacherConfig",
   
     
     
@@ -47,6 +48,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'apps.parent.middleware.DisableCSRFCheckMiddleware',
+   
+   
    
 ]
 

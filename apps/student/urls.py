@@ -10,6 +10,6 @@ urlpatterns = [
 
  
     path('info/', views.student_info, name='student_info'),
-   
+    
     
 ]    
