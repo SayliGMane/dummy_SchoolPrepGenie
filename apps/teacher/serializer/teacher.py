@@ -3,12 +3,16 @@ from apps.user.serializer.user import UserSerializer
 from apps.teacher.models.teacher import Teacher
 from apps.parent.models.parent import Class
 from apps.parent.serializer.classs import ClassSerializer
+from apps.teacher.serializer.timetable import TimeTableSerializer
+
 
 class TeacherSerializer(serializers.ModelSerializer):
     
     user = UserSerializer()  
 
     class_id = serializers.PrimaryKeyRelatedField(queryset=Class.objects.all())  
+
+    timetable = TimeTableSerializer(many=True, read_only=True)
     
     class Meta:
         model = Teacher
@@ -44,3 +48,5 @@ class TeacherSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['class_id'] = ClassSerializer(instance.class_id).data  # Expand class_id details
         return representation
+
+
