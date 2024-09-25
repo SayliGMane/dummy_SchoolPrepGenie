@@ -1,8 +1,9 @@
 from django.contrib import admin
 from apps.teacher.models.teacher import Teacher
+from apps.teacher.models.timetable import TimeTable
 
 
-
+#update same for timetable
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ('id','username', 'first_name', 'last_name', 'gender', 'class_name')
 
@@ -23,3 +24,4 @@ class TeacherAdmin(admin.ModelAdmin):
     class_name.admin_order_field = 'class_id__class_name' 
 
 admin.site.register(Teacher, TeacherAdmin)
+admin.site.register(TimeTable)
