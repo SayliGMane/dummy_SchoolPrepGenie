@@ -9,4 +9,4 @@ class TimeTable(models.Model):
     timetable_content = models.JSONField() 
     
     def __str__(self):
-        return f"Timetable for {self.teacher.user.username} - Class {self.class_id}"
+        return f"Timetable for {self.teacher.user.username} -  {self.class_id}"
